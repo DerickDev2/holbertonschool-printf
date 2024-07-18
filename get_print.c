@@ -1,28 +1,30 @@
 #include "main.h"
 
 /**
- * get_print - gets the function for the given format specifier
- * @format: format specifier
- *
- * Return: pointer to the corresponding function, or NULL if not found
+ * get_print - Selecciona la función correcta para realizar la operación
+ * @format: El especificador de formato pasado a _printf
+ * 
+ * Return: Un puntero a la función que corresponde
+ *         al especificador dado como parámetro
  */
 int (*get_print(char format))(va_list)
 {
-	print func_type[] = {
-		{"c", print_char},
-		{"s", print_string},
-		{"%", print_mod},
-		{"d", print_int},
-		{"i", print_int},
-		{NULL, NULL}
-	};
-	int = 0;
+    int i;
+    print func_type[] = {
+        {"c", print_char},
+        {"s", print_string},
+        {"%", print_mod},
+        {"d", print_int},
+        {"i", print_int},
+        {"r", print_reverse},
+        {NULL, NULL}
+    };
 
-	while (func_type[i].spec)
-	{
-		if (format == *fuc_type[i].spec)
-			return (func_type[i].func);
-		i++;
-	}
-	return (NULL);
+    for (i = 0; func_type[i].specifier != NULL; i++)
+    {
+        if (*(func_type[i].specifier) == format)
+            return (func_type[i].f);
+    }
+    return (NULL);
 }
+
