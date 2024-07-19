@@ -1,28 +1,24 @@
-#ifndef MAIN_H
-#define MAIN_H
-
+#ifndef PRINTF
+#define PRINTF
 #include <stdarg.h>
-#include <unistd.h>
-#include <stdio.h>  /* Necessary for snprintf */
-
+#include <stddef.h>
 /**
- * struct print - Struct for format specifiers and their functions
- * @specifier: The format specifier
- * @f: Pointer to the corresponding print function
+ * struct type_s - Struct type_s
+ * @opt: options
+ * @f: the associated function
  */
-typedef struct print
+typedef struct type_s
 {
-	char *specifier;
+	char opt;
 	int (*f)(va_list);
-} print;
+} type_t;
 
+int (*get_func(char s))(va_list);
+int _putchar(char c);
+int print_percent(va_list args);
+int print_c(va_list args);
+int print_s(va_list args);
+int print_d(va_list args);
 int _printf(const char *format, ...);
-int (*get_print(char format))(va_list);
-int print_char(va_list args);
-int print_string(va_list args);
-int print_mod(va_list args);
-int print_int(va_list args);
-int print_reverse(va_list args);
 
-#endif /* MAIN_H */
-
+#endif

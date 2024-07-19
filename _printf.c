@@ -1,47 +1,43 @@
 #include "main.h"
-
 /**
- * _printf - produces output according to a format
+ * _printf - prints everything
  * @format: format string
- *
- * Return: the number of characters printed
+ * Return: the count of printed characters
  */
+
 int _printf(const char *format, ...)
 {
+	int i = 0;
+	int count = 0;
 	va_list args;
-	int i = 0, count = 0;
-	int (*func)(va_list);
+	int (*func_ptr)(va_list);
 
-	va_start(args, format);
-	while (format && format[i])
+	if (format == NULL)
 	{
-		if (format[i] == '%')
+		return (-1);
+	}
+	va_start(args, format);
+	if (*format)
+	{
+		while (format[i])
 		{
-			i++;
-			func = get_print(format[i]);
-			if (func)
-				count += func(args);
-			else
+			if (format[i] == '%' && (!format[i + 1] || format[i + 1] == '\0'))
+				return (-1);
+			if (format[i] == '%')
 			{
-				if (format[i] != '\0')
+				func_ptr = get_func(format[i + 1]);
+				if (func_ptr)
 				{
-					write(1, &format[i - 1], 1);
-					write(1, &format[i], 1);
-					count += 2;
-				}
-				else
-				{
-					count += write(1, &format[i - 1], 1);
+					count += func_ptr(args);
+					i += 2;
+					continue;
 				}
 			}
+			_putchar(format[i]);
+			i++;
+			count++;
 		}
-		else
-		{
-			count += write(1, &format[i], 1);
-		}
-		i++;
 	}
 	va_end(args);
 	return (count);
 }
-
