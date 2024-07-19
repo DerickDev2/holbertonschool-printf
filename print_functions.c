@@ -10,6 +10,7 @@
 int print_char(va_list args)
 {
 	char c = va_arg(args, int);
+
 	return (write(1, &c, 1));
 }
 
@@ -75,21 +76,19 @@ int print_reverse(va_list args)
 {
 	char *str = va_arg(args, char *);
 	int len = 0;
+	int i;
 
 	if (!str)
 		str = "(null)";
 
-	
 	while (str[len])
 		len++;
 
-	
-	while (len > 0)
+	for (i = len - 1; i >= 0; i--)
 	{
-		len--;
-		putchar(str[len]);
+		write(1, &str[i], 1);
 	}
 
-	return len;
+	return (len);
 }
 

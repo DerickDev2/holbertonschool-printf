@@ -3,17 +3,17 @@
 
 #include <stdarg.h>
 #include <unistd.h>
-#include <stdio.h>  /* Necesario para snprintf */
+#include <stdio.h>  /* Necessary for snprintf */
 
 /**
- * struct print - Struct para los especificadores de formato y sus funciones
- * @specifier: El especificador de formato
- * @f: Puntero a la función correspondiente de impresión
+ * struct print - Struct for format specifiers and their functions
+ * @specifier: The format specifier
+ * @f: Pointer to the corresponding print function
  */
 typedef struct print
 {
-    char *specifier;
-    int (*f)(va_list);
+	char *specifier;
+	int (*f)(va_list);
 } print;
 
 int _printf(const char *format, ...);
